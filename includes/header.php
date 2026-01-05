@@ -35,14 +35,20 @@ $base = "http://localhost/Cms/";
             <a href="<?php echo $base; ?>menu.php">Menu</a>
             <a href="<?php echo $base; ?>about.php">About</a>
             <a href="<?php echo $base; ?>contact.php">Contact</a>
+            <a href="<?php echo $base; ?>customer/profile.php">Profile</a>
             <a href="<?php echo $base; ?>login.php" class="login-btn">Login</a>
          
 <?php 
+
 $cartCount = isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0;
+
 ?>
 <a href="<?php echo $base; ?>cart.php" class="cart-link">
     <img src="<?php echo $base; ?>assets/images/cart-icon.png" class="cart-svg">
-    <span class="cart-badge"><?php echo $cartCount; ?></span>
+   
+    
+<span class="cart-badge" id="cart-count"><?php echo $cartCount; ?></span>
+
 </a>
 
 

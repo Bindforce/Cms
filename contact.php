@@ -1,38 +1,40 @@
 <?php
-// contact.php
 session_start();
 include "includes/header.php";
 
-/* ========== DB CONNECTION ==========
-   Adjust these credentials if needed */
-$host = "localhost";
 $user = "root";
 $pass = "";
 $db   = "canteen_db";
+$host = "localhost";
 
 $connection = new mysqli($host, $user, $pass, $db);
 if ($connection->connect_error) {
     die("DB Connection failed: " . $connection->connect_error);
 }
 
-/* ========== HANDLE FEEDBACK SUBMISSION (PRG) ========== */
-/* Important: NO output before header() */
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    // Simple server-side validation
     $name    = isset($_POST['name']) ? trim($_POST['name']) : '';
     $email   = isset($_POST['email']) ? trim($_POST['email']) : '';
     $message = isset($_POST['message']) ? trim($_POST['message']) : '';
 
     if ($name === '' || $email === '' || $message === '') {
-        // Save error message to session and redirect
         $_SESSION['feedback_msg'] = "All fields are required.";
         $_SESSION['feedback_type'] = "error";
         header("Location: contact.php");
         exit();
     }
 
-    // Prepared statement to insert feedback
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $_SESSION['feedback_msg'] = "Please enter a valid email address.";
+        $_SESSION['feedback_type'] = "error";
+        header("Location: contact.php");
+        exit();
+    
+     } elseif (!preg_match('/@gmail\.com$/', $email)) {
+
+        $error = "Invalid email!";
+     }
     $stmt = $connection->prepare("INSERT INTO feedback (name, email, message) VALUES (?, ?, ?)");
     if ($stmt) {
         $stmt->bind_param("sss", $name, $email, $message);
@@ -49,13 +51,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['feedback_type'] = "error";
     }
 
-    // Redirect immediately (POST -> REDIRECT -> GET)
     header("Location: contact.php");
     exit();
 }
 
-/* ========== SHOW MESSAGE ONCE ==========
-   Read message from session (if any) and then unset it so refresh won't show again */
 $feedback_msg = "";
 $feedback_type = "";
 
@@ -63,7 +62,6 @@ if (isset($_SESSION['feedback_msg'])) {
     $feedback_msg  = $_SESSION['feedback_msg'];
     $feedback_type = isset($_SESSION['feedback_type']) ? $_SESSION['feedback_type'] : "success";
 
-    // remove session messages immediately so they do not appear again on refresh
     unset($_SESSION['feedback_msg']);
     unset($_SESSION['feedback_type']);
 }
@@ -106,7 +104,6 @@ body{
     gap: 40px;
 }
 
-/*contact*/
 .contact-info{
     background: #fff7ee;
     padding: 25px;
@@ -116,7 +113,6 @@ body{
 .contact-info h3{ color:var(--primary); margin:0 0 10px; }
 .contact-info p{ margin:8px 0; font-size:15px; }
 
-/*form*/
 form{
     background: #fff7ee;
     padding: 25px;
@@ -159,6 +155,17 @@ form button:hover{ background:var(--primary-dark); }
 .alert.success { background:#dbffe4; color:#145A32; border-left:6px solid #28a745; }
 .alert.error   { background:#ffecec; color:#6a1f1f; border-left:6px solid #dc3545; }
 
+.form-error {
+    background:#ffecec;
+    color:#6a1f1f;
+    border-left:6px solid #dc3545;
+    padding:12px 16px;
+    border-radius:8px;
+    margin-bottom:15px;
+    font-weight:600;
+    display:none;
+}
+
 .fade-out {
     animation: fadeOut 1s ease-in-out forwards;
     animation-delay: 3s;
@@ -187,7 +194,6 @@ form button:hover{ background:var(--primary-dark); }
     <?php endif; ?>
 
     <div class="contact-container">
-       
         <div class="contact-info">
             <h3>📍 Our Address</h3>
             <p><strong>Location:</strong> Birendra College, chitwan, Nepal</p>
@@ -201,9 +207,10 @@ form button:hover{ background:var(--primary-dark); }
             <p>Saturday: Closed</p>
         </div>
 
-       
-        <form method="POST" novalidate>
+        <form id="feedbackForm" method="POST" novalidate>
             <h3>📝 Send Your Feedback</h3>
+
+            <div id="formError" class="form-error"></div>
 
             <label for="name">Your Name</label>
             <input id="name" name="name" type="text" required placeholder="Enter your name">
@@ -221,21 +228,26 @@ form button:hover{ background:var(--primary-dark); }
 
 <script>
 
-(function(){
-    const alert = document.getElementById('feedbackAlert');
-    if (!alert) return;
+document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
+    const errorBox = document.getElementById('formError');
 
-    
-    setTimeout(() => {
-        alert.classList.add('fade-out');
-       
-        setTimeout(() => {
-            if (alert.parentNode) alert.parentNode.removeChild(alert);
-        }, 1000);
-    }, 2500);
-})();
-</script>
+    let errorMsg = "";
 
-</body>
-</html>
-<?php include('includes/footer.php'); ?>
+    if (name === "" || email === "" || message === "") {
+        errorMsg = "All fields are required.";
+    } else {
+        const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,}$/i;
+        if (!emailPattern.test(email)) {
+            errorMsg = "Please enter a valid email address.";
+        }
+    }
+
+    if (errorMsg !== "") {
+        e.preventDefault();
+        errorBox.textContent = errorMsg;
+        errorBox.style.display = "block";
+    } else {
+        error

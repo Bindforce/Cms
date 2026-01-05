@@ -65,7 +65,7 @@ function loadOrders() {
             count = parseInt(count);
 
             if (!firstLoad && count > lastCount) {
-                document.getElementById("ding").play(); // Only new orders
+                document.getElementById("ding").play(); 
             }
 
             firstLoad = false;

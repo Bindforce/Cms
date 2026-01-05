@@ -125,8 +125,8 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'staff') {
         <a href="dashboard.php">Dashboard</a>
         <a href="manage_menu.php">Manage Menu</a>
         <a href="view_orders.php">View Orders</a>
-        
-        <a href="logout.php" class="logout-btn">Logout</a>
+        <a href="feedback.php">Feedback</a>
+        <a href="../admin/logout.php" class="logout-btn">Logout</a>
     </div>
 
     
@@ -147,7 +147,11 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'staff') {
                 <button onclick="location.href='view_orders.php'">View</button>
             </div>
 
-            
+            <div class="card">
+                <h3>Feedback</h3>
+                <p>Help us improve</p>
+                <button onclick="location.href='feedback.php'">View</button>
+            </div>
 
         </div>
     </div>

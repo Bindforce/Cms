@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-// checking role
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     header("Location: ../login.php");
     exit;
@@ -124,6 +123,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
         <a href="manage_menu.php">Manage Menu</a>
         <a href="view_orders_admin.php">View Orders</a>
         <a href="manage_staff.php">Manage Staff</a>
+        <a href="feedback.php">Feedback</a>
         <a href="logout.php" class="logout-btn">Logout</a>
     </div>
 
@@ -148,6 +148,12 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
                 <h3>Staff</h3>
                 <p>Manage canteen staff accounts.</p>
                 <button onclick="location.href='manage_staff.php'">Manage</button>
+            </div>
+
+<div class="card">
+                <h3>Feedback</h3>
+                <p>Help us improve</p>
+                <button onclick="location.href='Feedback.php'">View</button>
             </div>
 
         </div>

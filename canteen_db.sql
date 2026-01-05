@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 03, 2025 at 01:11 PM
+-- Generation Time: Jan 04, 2026 at 03:06 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -24,6 +24,31 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `customers`
+--
+
+CREATE TABLE `customers` (
+  `customer_id` int(11) NOT NULL,
+  `full_name` varchar(100) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `username` varchar(50) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `customers`
+--
+
+INSERT INTO `customers` (`customer_id`, `full_name`, `email`, `username`, `password`) VALUES
+(1, 'rye', 'rsgfg@gmail.com', 'binod', '$2y$10$XaKp4l0xCfHvkgrJD3HhJ.XEg1tRiPgRqerlbK21k6NKKWIxn2RK2'),
+(2, 'dsgf', 'boom@bhgf.gfhgf', 'boom', '$2y$10$V.eC8SoQxQyJST1wd1ynb.BlPv.Dde0/75eFcHCE9vD4UiqVjtr5q'),
+(3, 'fgh', 'dsfgh@gmail.com', 'abc', '$2y$10$DMLQfkn42EPivCWTr5UsMucf0vPPUqjlihkeFEwhaAFFwbJUoCMfG'),
+(4, 'fdgfdhg', 'fdgfd@gmail.com', 'AAbc', '$2y$10$fvG1UJ.HC3BvKFNiDDU8eO8B3aOqaRA2fvRhwEhiNfs2n1CDU7Q0u'),
+(5, 'uiuy', 'yhuujy@gmail.com', 'ghg', '$2y$10$SRNjYJB2ijnf9lEmqic2puZxhkedFnv.Og/T3VQPP8QeiIpwnJHgu');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `feedback`
 --
 
@@ -40,16 +65,13 @@ CREATE TABLE `feedback` (
 --
 
 INSERT INTO `feedback` (`id`, `name`, `email`, `message`, `created_at`) VALUES
-(1, 'binod', 'binod@gmail.com', 'Service is good as I thought.', '2025-12-01 03:41:16'),
-(2, 'binod', 'binod@gmail.com', 'Service is good as I thought.', '2025-12-01 03:41:36'),
-(3, 'binod', 'binod@gmail.com', 'Service is good as I thought.', '2025-12-01 03:41:40'),
-(4, 'binod', 'binod@gmail.com', 'Service is good as I thought.', '2025-12-01 03:42:21'),
-(5, 'binod', 'binod@gmail.com', 'Service is good as I thought.', '2025-12-01 03:44:44'),
-(6, 'binod', 'binod@gmail.com', 'Service is good as I thought.', '2025-12-01 03:44:49'),
-(7, 'binod', 'binod@gmail.com', 'Service is good as I thought.', '2025-12-01 03:52:06'),
-(8, 'bikash', 'binod@gmail.com', 'this canteen is ok for me\r\n', '2025-12-01 03:53:28'),
 (9, 'bikash', 'binod@gmail.com', 'happy', '2025-12-01 03:59:38'),
-(10, 'binod', 'binod@gmail.com', 'testing', '2025-12-02 04:02:17');
+(11, 'fdf', 'tgrtg', 'rgrgrg', '2026-01-01 13:46:32'),
+(12, 'try', 'ytey', 'tyrty', '2026-01-01 13:46:56'),
+(13, 'fvf', 'fdce', 'fedc', '2026-01-01 14:37:01'),
+(14, 'ff', 'fhfgg@gmail.com', 'grg', '2026-01-01 14:47:03'),
+(15, 'fveef', 'efvefv@gmail.com', 'rvefvfrv', '2026-01-01 14:56:24'),
+(16, 'ghfhggf', 'fghgfhg@vcbc.gfgfd', 'kiului', '2026-01-04 12:41:29');
 
 -- --------------------------------------------------------
 
@@ -63,22 +85,22 @@ CREATE TABLE `menu_items` (
   `price` decimal(10,2) NOT NULL,
   `category` varchar(50) NOT NULL,
   `image` varchar(255) DEFAULT NULL,
-  `availability` tinyint(1) DEFAULT 1
+  `availability` tinyint(1) DEFAULT 1,
+  `stock` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `menu_items`
 --
 
-INSERT INTO `menu_items` (`item_id`, `name`, `price`, `category`, `image`, `availability`) VALUES
-(1, 'Veg Chowmein', 80.00, 'Snacks', 'Veg Chowmein.jpg', 1),
-(2, 'Chicken Momo', 120.00, 'Snacks', 'Chicken Momo.jpg', 1),
-(3, 'Tea', 20.00, 'Beverages', 'tea.jpg', 1),
-(4, 'Coffee', 30.00, 'Beverages', 'coffee.jpg', 1),
-(5, 'Veg Thali', 150.00, 'Lunch', 'thali.jpg', 1),
-(6, 'checken chowmein', 120.00, 'snack', 'checken chowmein.jpg', 1),
-(8, 'samosa tarkali', 60.00, 'beverage', 'samosa tarkali.jpg', 1),
-(70, 'bbbbbbb', 43.00, 'Lunch', '1764337401_5464.png', 1);
+INSERT INTO `menu_items` (`item_id`, `name`, `price`, `category`, `image`, `availability`, `stock`) VALUES
+(1, 'Veg Chowmein', 80.00, 'Snacks', 'Veg Chowmein.jpg', 1, 0),
+(2, 'Chicken Momo', 120.00, 'Snacks', 'Chicken Momo.jpg', 1, 0),
+(5, 'Veg Thali', 150.00, 'Lunch', 'thali.png', 1, 0),
+(6, 'chicken chowmein', 120.00, 'snack', 'chicken chowmein.jpg', 1, 0),
+(8, 'samosa tarkali', 60.00, 'beverage', 'samosa tarkali.jpg', 1, 0),
+(90, 'Tea', 25.00, 'Beverages', '1766064004_6934.jpg', 1, 0),
+(93, 'yy', 56.00, 'Lunch', '1767535152_1173.png', 1, 54);
 
 -- --------------------------------------------------------
 
@@ -88,6 +110,7 @@ INSERT INTO `menu_items` (`item_id`, `name`, `price`, `category`, `image`, `avai
 
 CREATE TABLE `orders` (
   `order_id` int(11) NOT NULL,
+  `customer_id` int(11) DEFAULT NULL,
   `customer_name` varchar(100) DEFAULT NULL,
   `table_address` varchar(150) NOT NULL,
   `total_amount` decimal(10,2) DEFAULT NULL,
@@ -99,85 +122,108 @@ CREATE TABLE `orders` (
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`order_id`, `customer_name`, `table_address`, `total_amount`, `order_time`, `status`) VALUES
-(1, 'binod', '', 160.00, '2025-10-30 12:41:42', 'Finished'),
-(2, 'binod', '', 160.00, '2025-10-30 12:42:38', 'Finished'),
-(3, 'binod', '', 120.00, '2025-10-30 13:11:26', 'Finished'),
-(4, 'hero', '', 80.00, '2025-10-31 04:53:33', 'Finished'),
-(5, 'hora', '', 120.00, '2025-10-31 05:28:39', 'Finished'),
-(6, 'admin', '', 20.00, '2025-10-31 05:35:22', 'Finished'),
-(7, 'admin1', '', 20.00, '2025-10-31 05:36:56', 'Finished'),
-(8, 'hnh', '', 30.00, '2025-10-31 05:37:35', 'Finished'),
-(9, 'jhmjhmj', '', 80.00, '2025-10-31 05:37:47', 'Finished'),
-(10, 'hoora', '', 60.00, '2025-10-31 05:55:13', 'Finished'),
-(11, 'tyt', '', 120.00, '2025-11-03 02:43:54', 'Finished'),
-(12, 'hbgf', '', 20.00, '2025-11-03 02:47:19', 'Finished'),
-(13, 'sadsa', '', 30.00, '2025-11-03 02:59:19', 'Finished'),
-(14, 'hjhg', '', 30.00, '2025-11-03 03:56:10', 'Finished'),
-(15, 'l;lk', '', 80.00, '2025-11-03 14:51:16', 'Finished'),
-(16, 'sadcsa', '', 120.00, '2025-11-03 14:51:40', 'Finished'),
-(17, 'ggkghk', '', 20.00, '2025-11-03 14:51:51', 'Finished'),
-(18, 'kmj', '', 80.00, '2025-11-03 14:52:09', 'Finished'),
-(19, 'vfgfd', '', 20.00, '2025-11-05 03:04:42', 'Finished'),
-(20, 'Website User', '', 80.00, '2025-11-05 03:46:05', 'Finished'),
-(21, 'Website User', '', 820.00, '2025-11-05 03:47:37', 'Finished'),
-(22, 'Website User', '', 300.00, '2025-11-05 03:56:43', 'Finished'),
-(23, 'Website User', '', 200.00, '2025-11-05 04:21:01', 'Finished'),
-(24, 'Website User', '', 200.00, '2025-11-05 09:05:12', 'Finished'),
-(25, 'Website User', '', 220.00, '2025-11-06 12:58:52', 'Finished'),
-(26, 'Website User', '', 140.00, '2025-11-06 13:11:26', 'Finished'),
-(27, 'Website User', '', 560.00, '2025-11-17 03:24:08', 'Finished'),
-(28, 'Website User', '', 460.00, '2025-11-17 13:10:16', 'Finished'),
-(29, 'Website User', '', 240.00, '2025-11-17 13:12:47', 'Finished'),
-(30, 'Website User', '', 120.00, '2025-11-17 13:15:31', 'Finished'),
-(31, 'Website User', '', 80.00, '2025-11-17 13:16:19', 'Finished'),
-(32, 'Website User', '', 740.00, '2025-11-17 13:20:35', 'Finished'),
-(33, 'Website User', '', 120.00, '2025-11-21 12:43:31', 'Finished'),
-(34, 'Website User', '', 20.00, '2025-11-21 12:43:43', 'Finished'),
-(35, 'Website User', '', 120.00, '2025-11-22 05:02:31', 'Finished'),
-(36, 'Website User', '', 80.00, '2025-11-24 11:15:46', 'Finished'),
-(37, 'Website User', '', 890.00, '2025-11-28 13:47:29', 'Finished'),
-(38, 'Website User', '', 60.00, '2025-11-28 13:55:33', 'Finished'),
-(39, 'Website User', '', 120.00, '2025-11-28 14:19:19', 'Finished'),
-(40, 'Website User', '', 300.00, '2025-11-28 14:24:42', 'Finished'),
-(41, 'Website User', '', 120.00, '2025-11-28 14:27:12', 'Finished'),
-(42, 'Website User', '', 220.00, '2025-11-29 12:56:59', 'Finished'),
-(43, 'Website User', '', 120.00, '2025-11-29 13:02:41', 'Finished'),
-(44, 'Website User', '', 360.00, '2025-11-29 13:13:34', 'Finished'),
-(45, 'Website User', '', 140.00, '2025-11-29 13:13:57', 'Finished'),
-(46, 'Website User', '', 140.00, '2025-11-29 13:16:26', 'Finished'),
-(47, 'Website User', '', 120.00, '2025-11-29 13:25:30', 'Finished'),
-(48, 'Website User', '', 80.00, '2025-11-29 13:26:59', 'Finished'),
-(49, 'Website User', '', 20.00, '2025-11-29 13:27:06', 'Finished'),
-(50, 'Website User', '', 120.00, '2025-11-29 13:27:19', 'Finished'),
-(51, 'Website User', '', 120.00, '2025-11-29 13:29:01', 'Finished'),
-(52, 'Website User', '', 120.00, '2025-11-29 13:30:55', 'Finished'),
-(53, 'Website User', '', 120.00, '2025-11-29 13:31:07', 'Finished'),
-(54, 'Website User', '', 120.00, '2025-11-29 13:37:04', 'Finished'),
-(55, 'Website User', '', 120.00, '2025-11-29 13:37:26', 'Finished'),
-(56, 'Website User', '', 220.00, '2025-11-29 13:40:39', 'Finished'),
-(57, 'Website User', '', 120.00, '2025-11-29 13:42:16', 'Finished'),
-(58, 'Website User', '', 43.00, '2025-11-29 13:43:25', 'Finished'),
-(59, 'Website User', '', 120.00, '2025-11-29 13:49:48', 'Finished'),
-(60, 'Website User', '', 20.00, '2025-11-29 13:50:50', 'Finished'),
-(61, 'Website User', '', 200.00, '2025-11-29 14:03:52', 'Finished'),
-(62, 'Website User', '', 120.00, '2025-11-29 14:04:23', 'Finished'),
-(63, 'Website User', '', 20.00, '2025-11-29 14:04:30', 'Finished'),
-(64, 'Website User', '', 80.00, '2025-11-29 14:08:50', 'Finished'),
-(65, 'Website User', '', 80.00, '2025-11-29 14:09:11', 'Finished'),
-(66, 'Website User', '', 410.00, '2025-11-29 14:20:55', 'Finished'),
-(67, 'Website User', '', 20.00, '2025-11-30 04:18:52', 'Finished'),
-(68, 'binod', 'dfdf', 80.00, '2025-11-30 04:32:31', 'Finished'),
-(69, 'binod', 'dfdf', 43.00, '2025-11-30 04:33:21', 'Finished'),
-(70, 'don', '4', 120.00, '2025-11-30 04:37:06', 'Finished'),
-(71, 'binod', '2', 390.00, '2025-12-01 04:02:17', 'Ongoing'),
-(72, 'binod', '5', 260.00, '2025-12-01 13:28:24', 'Finished'),
-(73, 'hero', '123', 200.00, '2025-12-01 13:29:21', 'Finished'),
-(74, 'binod', '8', 380.00, '2025-12-01 14:03:59', 'Finished'),
-(75, 'jhg', '7', 80.00, '2025-12-01 14:14:20', 'Finished'),
-(76, 'hero', 'efref', 520.00, '2025-12-01 14:23:47', 'Finished'),
-(77, 'admin', 'b', 260.00, '2025-12-01 14:46:51', 'Finished'),
-(78, 'binod', 'gaindakot', 300.00, '2025-12-02 04:02:44', 'Finished');
+INSERT INTO `orders` (`order_id`, `customer_id`, `customer_name`, `table_address`, `total_amount`, `order_time`, `status`) VALUES
+(1, NULL, 'binod', '', 160.00, '2025-10-30 12:41:42', 'Finished'),
+(2, NULL, 'binod', '', 160.00, '2025-10-30 12:42:38', 'Finished'),
+(3, NULL, 'binod', '', 120.00, '2025-10-30 13:11:26', 'Finished'),
+(4, NULL, 'hero', '', 80.00, '2025-10-31 04:53:33', 'Finished'),
+(5, NULL, 'hora', '', 120.00, '2025-10-31 05:28:39', 'Finished'),
+(6, NULL, 'admin', '', 20.00, '2025-10-31 05:35:22', 'Finished'),
+(7, NULL, 'admin1', '', 20.00, '2025-10-31 05:36:56', 'Finished'),
+(8, NULL, 'hnh', '', 30.00, '2025-10-31 05:37:35', 'Finished'),
+(9, NULL, 'jhmjhmj', '', 80.00, '2025-10-31 05:37:47', 'Finished'),
+(10, NULL, 'hoora', '', 60.00, '2025-10-31 05:55:13', 'Finished'),
+(11, NULL, 'tyt', '', 120.00, '2025-11-03 02:43:54', 'Finished'),
+(12, NULL, 'hbgf', '', 20.00, '2025-11-03 02:47:19', 'Finished'),
+(13, NULL, 'sadsa', '', 30.00, '2025-11-03 02:59:19', 'Finished'),
+(14, NULL, 'hjhg', '', 30.00, '2025-11-03 03:56:10', 'Finished'),
+(15, NULL, 'l;lk', '', 80.00, '2025-11-03 14:51:16', 'Finished'),
+(16, NULL, 'sadcsa', '', 120.00, '2025-11-03 14:51:40', 'Finished'),
+(17, NULL, 'ggkghk', '', 20.00, '2025-11-03 14:51:51', 'Finished'),
+(18, NULL, 'kmj', '', 80.00, '2025-11-03 14:52:09', 'Finished'),
+(19, NULL, 'vfgfd', '', 20.00, '2025-11-05 03:04:42', 'Finished'),
+(20, NULL, 'Website User', '', 80.00, '2025-11-05 03:46:05', 'Finished'),
+(21, NULL, 'Website User', '', 820.00, '2025-11-05 03:47:37', 'Finished'),
+(22, NULL, 'Website User', '', 300.00, '2025-11-05 03:56:43', 'Finished'),
+(23, NULL, 'Website User', '', 200.00, '2025-11-05 04:21:01', 'Finished'),
+(24, NULL, 'Website User', '', 200.00, '2025-11-05 09:05:12', 'Finished'),
+(25, NULL, 'Website User', '', 220.00, '2025-11-06 12:58:52', 'Finished'),
+(26, NULL, 'Website User', '', 140.00, '2025-11-06 13:11:26', 'Finished'),
+(27, NULL, 'Website User', '', 560.00, '2025-11-17 03:24:08', 'Finished'),
+(28, NULL, 'Website User', '', 460.00, '2025-11-17 13:10:16', 'Finished'),
+(29, NULL, 'Website User', '', 240.00, '2025-11-17 13:12:47', 'Finished'),
+(30, NULL, 'Website User', '', 120.00, '2025-11-17 13:15:31', 'Finished'),
+(31, NULL, 'Website User', '', 80.00, '2025-11-17 13:16:19', 'Finished'),
+(32, NULL, 'Website User', '', 740.00, '2025-11-17 13:20:35', 'Finished'),
+(33, NULL, 'Website User', '', 120.00, '2025-11-21 12:43:31', 'Finished'),
+(34, NULL, 'Website User', '', 20.00, '2025-11-21 12:43:43', 'Finished'),
+(35, NULL, 'Website User', '', 120.00, '2025-11-22 05:02:31', 'Finished'),
+(36, NULL, 'Website User', '', 80.00, '2025-11-24 11:15:46', 'Finished'),
+(37, NULL, 'Website User', '', 890.00, '2025-11-28 13:47:29', 'Finished'),
+(38, NULL, 'Website User', '', 60.00, '2025-11-28 13:55:33', 'Finished'),
+(39, NULL, 'Website User', '', 120.00, '2025-11-28 14:19:19', 'Finished'),
+(40, NULL, 'Website User', '', 300.00, '2025-11-28 14:24:42', 'Finished'),
+(41, NULL, 'Website User', '', 120.00, '2025-11-28 14:27:12', 'Finished'),
+(42, NULL, 'Website User', '', 220.00, '2025-11-29 12:56:59', 'Finished'),
+(43, NULL, 'Website User', '', 120.00, '2025-11-29 13:02:41', 'Finished'),
+(44, NULL, 'Website User', '', 360.00, '2025-11-29 13:13:34', 'Finished'),
+(45, NULL, 'Website User', '', 140.00, '2025-11-29 13:13:57', 'Finished'),
+(46, NULL, 'Website User', '', 140.00, '2025-11-29 13:16:26', 'Finished'),
+(47, NULL, 'Website User', '', 120.00, '2025-11-29 13:25:30', 'Finished'),
+(48, NULL, 'Website User', '', 80.00, '2025-11-29 13:26:59', 'Finished'),
+(49, NULL, 'Website User', '', 20.00, '2025-11-29 13:27:06', 'Finished'),
+(50, NULL, 'Website User', '', 120.00, '2025-11-29 13:27:19', 'Finished'),
+(51, NULL, 'Website User', '', 120.00, '2025-11-29 13:29:01', 'Finished'),
+(52, NULL, 'Website User', '', 120.00, '2025-11-29 13:30:55', 'Finished'),
+(53, NULL, 'Website User', '', 120.00, '2025-11-29 13:31:07', 'Finished'),
+(54, NULL, 'Website User', '', 120.00, '2025-11-29 13:37:04', 'Finished'),
+(55, NULL, 'Website User', '', 120.00, '2025-11-29 13:37:26', 'Finished'),
+(56, NULL, 'Website User', '', 220.00, '2025-11-29 13:40:39', 'Finished'),
+(57, NULL, 'Website User', '', 120.00, '2025-11-29 13:42:16', 'Finished'),
+(58, NULL, 'Website User', '', 43.00, '2025-11-29 13:43:25', 'Finished'),
+(59, NULL, 'Website User', '', 120.00, '2025-11-29 13:49:48', 'Finished'),
+(60, NULL, 'Website User', '', 20.00, '2025-11-29 13:50:50', 'Finished'),
+(61, NULL, 'Website User', '', 200.00, '2025-11-29 14:03:52', 'Finished'),
+(62, NULL, 'Website User', '', 120.00, '2025-11-29 14:04:23', 'Finished'),
+(63, NULL, 'Website User', '', 20.00, '2025-11-29 14:04:30', 'Finished'),
+(64, NULL, 'Website User', '', 80.00, '2025-11-29 14:08:50', 'Finished'),
+(65, NULL, 'Website User', '', 80.00, '2025-11-29 14:09:11', 'Finished'),
+(66, NULL, 'Website User', '', 410.00, '2025-11-29 14:20:55', 'Finished'),
+(67, NULL, 'Website User', '', 20.00, '2025-11-30 04:18:52', 'Finished'),
+(68, NULL, 'binod', 'dfdf', 80.00, '2025-11-30 04:32:31', 'Finished'),
+(69, NULL, 'binod', 'dfdf', 43.00, '2025-11-30 04:33:21', 'Finished'),
+(70, NULL, 'don', '4', 120.00, '2025-11-30 04:37:06', 'Finished'),
+(71, NULL, 'binod', '2', 390.00, '2025-12-01 04:02:17', 'Finished'),
+(72, NULL, 'binod', '5', 260.00, '2025-12-01 13:28:24', 'Finished'),
+(73, NULL, 'hero', '123', 200.00, '2025-12-01 13:29:21', 'Finished'),
+(74, NULL, 'binod', '8', 380.00, '2025-12-01 14:03:59', 'Finished'),
+(75, NULL, 'jhg', '7', 80.00, '2025-12-01 14:14:20', 'Finished'),
+(76, NULL, 'hero', 'efref', 520.00, '2025-12-01 14:23:47', 'Finished'),
+(77, NULL, 'admin', 'b', 260.00, '2025-12-01 14:46:51', 'Finished'),
+(78, NULL, 'binod', 'gaindakot', 300.00, '2025-12-02 04:02:44', 'Finished'),
+(79, NULL, 'dsf', '3', 190.00, '2025-12-03 13:02:24', 'Finished'),
+(80, NULL, 'binod', 'gaindakot', 773.00, '2025-12-03 13:15:04', 'Finished'),
+(81, NULL, 'binod', '2', 180.00, '2025-12-18 04:01:47', 'Finished'),
+(82, NULL, 'binod', '2', 120.00, '2025-12-18 04:12:22', 'Finished'),
+(83, NULL, 'binod', '2', 220.00, '2025-12-18 13:20:44', 'Finished'),
+(84, NULL, 'binod', '1', 160.00, '2025-12-20 05:23:07', 'Finished'),
+(85, NULL, '......', '.....', 200.00, '2025-12-20 05:27:10', 'Finished'),
+(86, NULL, 'bmc', 'bmc', 6160.00, '2025-12-20 05:30:52', 'Finished'),
+(87, NULL, 'binod', 'hh', 1200000.00, '2025-12-20 05:31:25', 'Finished'),
+(88, NULL, 'hg', 'gh', 120.00, '2026-01-01 13:47:52', 'Finished'),
+(89, NULL, 'hj', 'jhgh', 120.00, '2026-01-03 14:03:40', 'Finished'),
+(90, NULL, 'rtre', 'retre', 460.00, '2026-01-03 14:22:12', 'Finished'),
+(92, NULL, 'yrty', 'ry', 300.00, '2026-01-03 14:34:44', 'Finished'),
+(93, 1, 'yujiuy', 'uiuy', 240.00, '2026-01-03 14:37:55', 'Finished'),
+(94, 1, 'ytr', 'rytry', 50.00, '2026-01-03 14:54:13', 'Finished'),
+(95, 1, 'hgjgh', 'ghjk', 400.00, '2026-01-04 03:35:31', 'Finished'),
+(96, 1, 'rye', 'ghgf', 240.00, '2026-01-04 03:51:16', 'Finished'),
+(97, 1, 'rye', '....', 480.00, '2026-01-04 03:51:32', 'Finished'),
+(98, 1, 'rye', '1', 240.00, '2026-01-04 03:56:03', 'Finished'),
+(99, 1, 'rye', '4', 246.00, '2026-01-04 04:44:26', 'Finished'),
+(100, 1, 'rye', 'l', 123.00, '2026-01-04 12:15:42', 'Finished'),
+(101, 1, 'rye', '5', 123.00, '2026-01-04 12:16:34', 'Finished'),
+(102, 1, 'rye', '4', 30.00, '2026-01-04 13:23:59', 'Ongoing');
 
 -- --------------------------------------------------------
 
@@ -313,7 +359,42 @@ INSERT INTO `order_items` (`order_item_id`, `order_id`, `item_id`, `quantity`, `
 (115, 76, 2, 3, 360.00),
 (116, 77, 2, 2, 240.00),
 (117, 77, 3, 1, 20.00),
-(118, 78, 5, 2, 300.00);
+(118, 78, 5, 2, 300.00),
+(119, 79, 3, 1, 20.00),
+(120, 79, 6, 1, 120.00),
+(121, 79, 85, 1, 50.00),
+(122, 80, 2, 1, 120.00),
+(123, 80, 5, 1, 150.00),
+(124, 80, 85, 1, 50.00),
+(125, 80, 87, 1, 453.00),
+(126, 81, 1, 2, 160.00),
+(127, 81, 3, 1, 20.00),
+(128, 82, 2, 1, 120.00),
+(129, 83, 1, 1, 80.00),
+(130, 83, 2, 1, 120.00),
+(131, 83, 3, 1, 20.00),
+(132, 84, 1, 2, 160.00),
+(133, 85, 1, 1, 80.00),
+(134, 85, 2, 1, 120.00),
+(135, 86, 1, 2, 160.00),
+(136, 86, 2, 50, 6000.00),
+(137, 87, 2, 10000, 1200000.00),
+(138, 88, 2, 1, 120.00),
+(139, 89, 2, 1, 120.00),
+(140, 90, 5, 2, 300.00),
+(141, 90, 1, 2, 160.00),
+(142, 92, 5, 2, 300.00),
+(143, 93, 2, 2, 240.00),
+(144, 94, 90, 2, 50.00),
+(145, 95, 1, 2, 160.00),
+(146, 95, 2, 2, 240.00),
+(147, 96, 2, 2, 240.00),
+(148, 97, 2, 4, 480.00),
+(149, 98, 2, 2, 240.00),
+(150, 99, 91, 2, 246.00),
+(151, 100, 91, 1, 123.00),
+(152, 101, 91, 1, 123.00),
+(153, 102, 92, 1, 30.00);
 
 -- --------------------------------------------------------
 
@@ -336,11 +417,19 @@ INSERT INTO `users` (`user_id`, `username`, `password`, `role`) VALUES
 (6, 'admin', 'admin123', 'admin'),
 (8, 'staff', 'staff123', 'staff'),
 (18, 'staff1', 'staff123', 'staff'),
-(20, 'waiter', 'waiter123', 'staff');
+(20, 'waiter', 'waiter123', 'staff'),
+(21, 'cook', 'cook123', 'staff');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `customers`
+--
+ALTER TABLE `customers`
+  ADD PRIMARY KEY (`customer_id`),
+  ADD UNIQUE KEY `username` (`username`);
 
 --
 -- Indexes for table `feedback`
@@ -358,15 +447,16 @@ ALTER TABLE `menu_items`
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
-  ADD PRIMARY KEY (`order_id`);
+  ADD PRIMARY KEY (`order_id`),
+  ADD KEY `fk_orders_customer` (`customer_id`);
 
 --
 -- Indexes for table `order_items`
 --
 ALTER TABLE `order_items`
   ADD PRIMARY KEY (`order_item_id`),
-  ADD KEY `order_id` (`order_id`),
-  ADD KEY `item_id` (`item_id`);
+  ADD KEY `item_id` (`item_id`),
+  ADD KEY `order_id` (`order_id`);
 
 --
 -- Indexes for table `users`
@@ -380,45 +470,56 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `customers`
+--
+ALTER TABLE `customers`
+  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `feedback`
 --
 ALTER TABLE `feedback`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `menu_items`
 --
 ALTER TABLE `menu_items`
-  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `order_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
+  MODIFY `order_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=154;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- Constraints for dumped tables
 --
 
 --
+-- Constraints for table `orders`
+--
+ALTER TABLE `orders`
+  ADD CONSTRAINT `fk_orders_customer` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`customer_id`) ON DELETE CASCADE;
+
+--
 -- Constraints for table `order_items`
 --
 ALTER TABLE `order_items`
-  ADD CONSTRAINT `order_items_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`),
-  ADD CONSTRAINT `order_items_ibfk_2` FOREIGN KEY (`item_id`) REFERENCES `menu_items` (`item_id`);
+  ADD CONSTRAINT `order_items_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

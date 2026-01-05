@@ -55,3 +55,20 @@ Tools: XAMPP, VS Code
 🎓 About This Project
 
 This project was developed as a college project to create a functional and user-friendly system for managing canteen operations digitally.
+
+
+
+
+
+
+
+
+
+Steps to open the project are:
+Download the xampp, first
+1. open xampp, and import the database canteen_db.sql
+2. In device file explorer, open xampp folder and under xampp folder, open htdocs and creat the new folder with the name Cms
+3. upload the all folder and file (which is in github) in Cms floder
+4. open xampp control panel and start apache and Mysql
+5. run the command in any browser (localhost/Cms)
+6. project or website is ready to use........

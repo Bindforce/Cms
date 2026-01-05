@@ -7,6 +7,13 @@ if (!isset($_SESSION['cart']) || count($_SESSION['cart']) == 0) {
     exit();
 }
 
+if (!isset($_SESSION['customer_id'])) {
+    header("Location: login.php");
+    exit;
+}
+
+$customer_id = $_SESSION['customer_id'];
+
 
 $customer_name = mysqli_real_escape_string($conn, $_POST['customer_name']);
 $table_address = mysqli_real_escape_string($conn, $_POST['address']);
@@ -19,8 +26,8 @@ foreach ($_SESSION['cart'] as $item) {
 }
 
 
-$sql = "INSERT INTO orders (customer_name, table_address, total_amount, status)
-        VALUES ('$customer_name', '$table_address', $total, 'Ongoing')";
+$sql = "INSERT INTO orders (customer_id, customer_name, table_address, total_amount, status)
+        VALUES ('$customer_id', '$customer_name', '$table_address', $total, 'Ongoing')";
 
 $conn->query($sql);
 
@@ -35,6 +42,20 @@ foreach ($_SESSION['cart'] as $item) {
 
     $conn->query("INSERT INTO order_items (order_id, item_id, quantity, subtotal)
                   VALUES ($order_id, $id, $qty, $sub)");
+}
+
+
+
+foreach ($_SESSION['cart'] as $item) {
+
+    $item_id = $item['id'];
+    $qty = $item['qty'];
+
+    $conn->query("
+        UPDATE menu_items 
+        SET stock = stock - $qty 
+        WHERE item_id = $item_id
+    ");
 }
 
 

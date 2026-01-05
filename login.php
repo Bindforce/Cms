@@ -4,6 +4,7 @@ include "includes/db_connect.php";
 include "includes/header.php";
 
 $error = "";
+$loginSuccess = false;
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -11,8 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = trim($_POST['username']);
     $password = trim($_POST['password']);
 
-    // Fetch user from database
-    $sql = "SELECT * FROM users WHERE username = ?";
+    $sql = "SELECT * FROM users WHERE username=?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $username);
     $stmt->execute();
@@ -24,30 +24,56 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($password === $row['password']) {
 
-           
             $_SESSION['user_id'] = $row['user_id'];
             $_SESSION['username'] = $row['username'];
             $_SESSION['role'] = $row['role'];
 
-            
             echo "<script>
-                    document.body.classList.add('fade-out');
-                    setTimeout(function() { window.location.href='" . 
-                   ($row['role'] === 'admin' ? 'admin/dashboard.php' : 'staff/dashboard.php') . 
-            "'; 
-        }, 500);
-                   
-                </script>";
+                document.body.classList.add('fade-out');
+                setTimeout(function() {
+                    window.location.href='" .
+                    ($row['role'] === 'admin'
+                        ? 'admin/dashboard.php'
+                        : 'staff/dashboard.php') .
+                "';
+                }, 500);
+            </script>";
             exit();
+        } else {
+            $error = "Invalid username or password!";
+            $loginSuccess = true; 
+        }
+    }
+
+    if (!$loginSuccess) {
+
+        $sql = "SELECT * FROM customers WHERE username=?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows === 1) {
+
+            $row = $result->fetch_assoc();
+
+            if (password_verify($password, $row['password'])) {
+
+                $_SESSION['customer_id'] = $row['customer_id'];
+                $_SESSION['username'] = $row['username'];
+                $_SESSION['role'] = 'customer';
+
+                header("Location: menu.php");
+                exit();
+            } else {
+                $error = "Invalid username or password!";
+            }
 
         } else {
-            $error = "Incorrect password!";
+            $error = "Invalid username or password!";
         }
-
-    } else {
-        $error = "Username not found!";
     }
-}
+}  
 ?>
 
 <style>
@@ -166,7 +192,13 @@ body {
         </div>
 
         <button type="submit" class="login-bt">Login</button>
+        <p style="text-align:center; margin-top:15px; font-size:15px;">
+    No account?
+    <a href="register.php" style="color:#ff3d1f; font-weight:bold; text-decoration:none;">
+        Create one
+    </a>
+</p>
+
     </form>
 </div>
-
 
